@@ -10,4 +10,3 @@ module Api
     end
   end
 end
-# git remote set-url origin https://takeshita0531@github.com/takeshita0531/test_api.git
