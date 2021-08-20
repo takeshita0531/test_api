@@ -34,7 +34,7 @@ module Api
       
         def ensure_user
             post_user = Post.find_by(id: params[:id])
-            unless post_user.user_id == session[:user_id]
+            unless post_user.user_id == @current_user
                 redirect_to api_v1_posts_path
             end
         end
