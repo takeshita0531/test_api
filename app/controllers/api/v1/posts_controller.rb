@@ -15,17 +15,18 @@ module Api
         else
             render json: { status: 'SUCCESS', data: post_new.errors }
         end
+      end
         
         def update
-            @post.update(post_params)
+            if @post.update(post_params)
                 render json: { status: 'SUCCESS', data: @post }
+            else
+                render json: { status: 'SUCCESS', data: @post.errors }
+            end
         end
         
         def destroy
-            if @post.destroy
-                render json: { status: 'SUCCESS', data: @post }
-            else
-            end
+            render json: { status: 'SUCCESS', data: @post }
         end
         
       private
@@ -34,9 +35,9 @@ module Api
           @post = Post.find(params[:id])
         end
       
-      def post_params
+        def post_params
           params.require(:post).permit(:title)
-      end
+        end
     end
   end
 end
