@@ -10,7 +10,6 @@ module Api
       
       def create
         post_new = Post.new(post_params)
-        # post_new.user_id = session[:user_id]
         if post_new.save
             render json: { status: 'SUCCESS', data: post_new }
         else
@@ -36,7 +35,7 @@ module Api
         def ensure_user
             post_user = Post.find_by(id: params[:id])
             unless post_user.user_id == session[:user_id]
-                redirect_to api_v1_posts
+                redirect_to api_v1_posts_path
             end
         end
       
