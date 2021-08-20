@@ -36,7 +36,7 @@ module Api
         def ensure_user
             post_user = Post.find_by(id: params[:id])
             user_id = post_params[:user_id]
-            unless post_user.user_id == user_id.id
+            unless post_user.user_id == user_id
                 redirect_to api_v1_posts_path
             end
         end
