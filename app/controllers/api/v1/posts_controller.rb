@@ -3,6 +3,7 @@ module Api
     class PostsController < ApplicationController
         before_action :set_post, only: [:update, :destroy]
         before_action :ensure_user, only: [:update, :destroy]
+        
       def index
         posts = Post.all
         render json: { status: 'SUCCESS', message: 'Loaded posts', data: posts }
@@ -34,7 +35,9 @@ module Api
       
         def ensure_user
             post_user = Post.find_by(id: params[:id])
-            unless post_user.user_id == @current_user
+            user_id = post_params[:user_id]
+            binding.pry
+            unless post_user.user_id == user_id.id
                 redirect_to api_v1_posts_path
             end
         end
