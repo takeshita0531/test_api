@@ -10,7 +10,7 @@ module Api
       
       def create
         post_new = Post.new(post_params)
-        post_new.user_id = session[:user_id]
+        # post_new.user_id = session[:user_id]
         if post_new.save
             render json: { status: 'SUCCESS', data: post_new }
         else
@@ -45,7 +45,7 @@ module Api
         end
       
         def post_params
-          params.require(:post).permit(:title)
+          params.require(:post).permit(:title, :user_id)
         end
     end
   end
