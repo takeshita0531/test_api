@@ -7,21 +7,21 @@ module Api
                 render json: { status: 'SUCCESS', data: users }
             end
             
-            def create
-                user = User.new(user_params)
-                if user.save 
-                    session[:user_id] = user.id
-                    render json: { status: 'SUCCESS', data: user }
-                else
-                    render json: { status: 'SUCCESS', data: user.errors }
-                end
-            end
+            # def create
+            #     user = User.new(user_params)
+            #     if user.save 
+            #         # session[:user_id] = user.id
+            #         render json: { status: 'SUCCESS', data: user }
+            #     else
+            #         render json: { status: 'SUCCESS', data: user.errors }
+            #     end
+            # end
             
-            private
+            # private
             
-            def user_params
-                params.require(:user).permit(:name)
-            end
+            # def user_params
+            #     params.require(:user).permit(:name)
+            # end
         end
     end
 end
