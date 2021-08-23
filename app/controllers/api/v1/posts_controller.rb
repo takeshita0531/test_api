@@ -3,9 +3,9 @@ module Api
     class PostsController < ApplicationController
       include ActionController::HttpAuthentication::Token::ControllerMethods
       
-      before_action :authenticate
       before_action :set_post, only: [:update, :destroy]
       before_action :ensure_user, only: [:update, :destroy]
+      before_action :authenticate
         
       def index
         posts = Post.all
