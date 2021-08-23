@@ -1,8 +1,11 @@
 module Api
   module V1
     class PostsController < ApplicationController
-        before_action :set_post, only: [:update, :destroy]
-        before_action :ensure_user, only: [:update, :destroy]
+      include ActionController::HttpAuthentication::Token::ControllerMethods
+      
+      before_action :authenticate
+      before_action :set_post, only: [:update, :destroy]
+      before_action :ensure_user, only: [:update, :destroy]
         
       def index
         posts = Post.all
@@ -32,6 +35,13 @@ module Api
         end
         
       private
+      
+        def authenticate
+          authenticate_or_request_with_http_token do |token,options|
+            auth_user = User.find_by(token: token)
+            auth_user != nil ? true : false
+          end
+        end
       
         def ensure_user
             post_user = Post.find_by(id: params[:id])
